@@ -32,7 +32,7 @@ textInputElement.addEventListener('input', () => {
   let correctWordsCount = 0;
   arrayText.forEach((word, index) => {
     if (arrayValue[index] === word) {
-      correctWordsCount++;
+      ++correctWordsCount;
     }
   });
   correctWords = correctWordsCount;
@@ -43,9 +43,9 @@ textInputElement.addEventListener('input', () => {
   let correct = true;
   arrayChars.forEach((charSpan, index) => {
     const char = inputChars[index];
-    if (char ==  null) {
+    if (char === null) {
       charSpan.classList.remove('correct', 'incorrect');
-      correct  = false;
+      correct = false;
     } else if (char === charSpan.innerText) {
       charSpan.classList.add('correct');
       charSpan.classList.remove('incorrect');
@@ -55,10 +55,10 @@ textInputElement.addEventListener('input', () => {
       correct = false;
     }
   });
-  if (correct) renderNewText();
+  if (correct) {renderNewText();}
 });
 
-const stopGame = () => {
+function stopGame() {
   textInputElement.style.display = 'none';
   containerElement.classList.add('display-correct-words');
   containerElement.innerText = `Correct Words: ${correctWords}`;
@@ -74,16 +74,18 @@ const startTimer = () => {
   }
 }
 
-const startGame = () => {
-  startButton.style.display = "none";
+const second = 1000;
+
+function startGame () {
+  startButton.style.display = 'none';
   textDisplayElement.classList.add('text-display');
   textInputElement.autofocus = true;
   textInputElement.classList.add('text-input');
-  textInputElement.placeholder='Enter the text:';
+  textInputElement.placeholder = 'Enter the text:';
   containerElement.classList.add('container');
   containerElement.appendChild(textDisplayElement);
   containerElement.appendChild(textInputElement);
-  intervalID = setInterval(startTimer, 1000);
+  intervalID = setInterval(startTimer, second);
   renderNewText();
 };
 
